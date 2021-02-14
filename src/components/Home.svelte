@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { Heladeria } from './model/heladeria'
-  import { fetchHeladerias } from './service/heladeria-service'
+  import type { Heladeria } from '../model/heladeria'
+  import { fetchHeladerias } from '../service/heladeria-service'
 
   let heladerias: Heladeria[] = []
   let nombreBuscar: string = ''
