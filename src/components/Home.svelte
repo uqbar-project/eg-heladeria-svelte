@@ -1,11 +1,12 @@
 <script lang="ts">
   import type { Heladeria } from '../model/heladeria'
-  import { fetchHeladerias } from '../service/heladeria-service'
+  import heladeriaService from '../service/heladeria-service'
 
   let heladerias: Heladeria[] = []
   let nombreBuscar: string = ''
+
   async function getHeladerias() {
-    heladerias = await fetchHeladerias(nombreBuscar)
+    heladerias = await heladeriaService.buscarHeladerias(nombreBuscar)
   }
 </script>
 

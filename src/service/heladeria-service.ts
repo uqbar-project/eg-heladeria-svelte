@@ -7,6 +7,8 @@ async function httpRequest<T>(request: RequestInfo): Promise<T> {
   return body
 }
 
-export async function fetchHeladerias(nombreBuscar) {
-  return httpRequest<Heladeria[]>(`${BACKEND_URL}/heladerias/${nombreBuscar}`)
+async function buscarHeladerias(nombreBuscar: string) {
+  return httpRequest<Heladeria[]>(`${BACKEND_URL}/heladerias/buscar/${nombreBuscar}`)
 }
+
+export default { buscarHeladerias }

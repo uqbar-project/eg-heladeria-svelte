@@ -7,8 +7,11 @@ export type Heladeria = {
   duenio: Duenio
 }
 
-export type TipoHeladeria = 'ECONOMICA' | 'ARTESANAL' | 'INDUSTRIAL'
+export const tiposHeladeria = ['ECONOMICA', 'ARTESANAL', 'INDUSTRIAL'] as const
+
+type TipoHeladeria = typeof tiposHeladeria[number]
 
 export type Gusto = {
+  nombre: string
   dificultad: number
 }
