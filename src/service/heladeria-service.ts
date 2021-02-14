@@ -11,4 +11,8 @@ async function buscarHeladerias(nombreBuscar: string) {
   return httpRequest<Heladeria[]>(`${BACKEND_URL}/heladerias/buscar/${nombreBuscar}`)
 }
 
-export default { buscarHeladerias }
+async function fetchById(heladeriaId: number) {
+  return httpRequest<Heladeria>(`${BACKEND_URL}/heladerias/id/${heladeriaId}`)
+}
+
+export default { buscarHeladerias, fetchById }

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { navigate } from 'svelte-routing'
   import type { Heladeria } from '../model/heladeria'
   import heladeriaService from '../service/heladeria-service'
 
@@ -8,17 +9,16 @@
   async function getHeladerias() {
     heladerias = await heladeriaService.buscarHeladerias(nombreBuscar)
   }
+
+  function editarHeladeria(heladeria: Heladeria) {
+    navigate(`/editar-heladeria/${heladeria.id}`)
+  }
 </script>
 
 <main>
   <h1>Heladerias</h1>
   <h3>Buscar por nombre</h3>
-  <input
-    type="text"
-    name="input-buscar"
-    id="input-buscar"
-    bind:value={nombreBuscar}
-  />
+  <input type="text" name="input-buscar" id="input-buscar" bind:value={nombreBuscar} />
   <button on:click={getHeladerias}>Buscar</button>
   <label for="lista-resultados" />
   <table>
@@ -30,10 +30,10 @@
       <tr>
         <td>{heladeria.nombre}</td>
         <td>{heladeria.duenio.nombreCompleto}</td>
+        <td><button on:click={() => editarHeladeria(heladeria)}>editar</button></td>
       </tr>
     {/each}
   </table>
-  <button>Editar heladeria</button>
 </main>
 
 <style>
