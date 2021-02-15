@@ -1,1 +1,16 @@
-GET http://localhost:8080/heladerias/
+# Para usar este archivo, hay que instalar la extensión "REST Client" desde las extensiones de VS Code.
+
+GET http://localhost:8080/heladerias/buscar/t
+
+###
+
+GET http://localhost:8080/heladerias/id/1
+
+###
+
+DELETE http://localhost:8080/heladerias/1/eliminarGustos
+content-type: application/json
+
+{
+    "pistacchio": 12
+}
