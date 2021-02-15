@@ -1,11 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import type { Duenio } from '../model/duenio'
-  import type { Gusto, GustoObject, Heladeria } from '../model/heladeria'
+  import type { Gustos, Heladeria } from '../model/heladeria'
   import { tiposHeladeria } from '../model/heladeria'
-  import Routes from '../Routes.svelte'
   import heladeriaService from '../service/heladeria-service'
-  import Home from './Home.svelte'
 
   export let id: number
   let heladeria: Heladeria
@@ -14,10 +12,6 @@
 
   async function getHeladeria() {
     heladeria = await heladeriaService.fetchById(id)
-  }
-
-  function mapToList(): GustoObject[] {
-    return Object.entries(heladeria.gustos).map(([nombre, dificultad]: [string, number]) => ({ nombre, dificultad }))
   }
 
   async function getDuenios() {
@@ -31,9 +25,8 @@
     heladeria.duenio = nuevoDuenio
   }
 
-  async function eliminarGusto(gustoSeleccionado: GustoObject) {
-    heladeria = await heladeriaService.deleteGustos(heladeria.id, gustoSeleccionado)
-    console.log(heladeria)
+  async function eliminarGusto(gusto: Gustos) {
+    heladeria = await heladeriaService.deleteGustos(heladeria.id, gusto)
   }
 
   onMount(async () => {
@@ -69,11 +62,12 @@
         <th>Gusto</th>
         <th>Dificultad</th>
       </tr>
-      {#each mapToList() as gusto}
+
+      {#each Object.entries(heladeria.gustos) as [nombre, dificultad]}
         <tr>
-          <td>{gusto.nombre}</td>
-          <td>{gusto.dificultad}</td>
-          <td><button on:click={() => eliminarGusto(gusto)}>eliminar</button></td>
+          <td>{nombre}</td>
+          <td>{dificultad}</td>
+          <td><button on:click={() => eliminarGusto({ [nombre]: dificultad })}>eliminar</button></td>
         </tr>
       {/each}
     </table>

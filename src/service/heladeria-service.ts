@@ -1,7 +1,6 @@
-import type { Heladeria } from '../model/heladeria'
-import { BACKEND_URL } from './constants'
 import type { Duenio } from '../model/duenio'
-import type { GustoObject } from '../model/heladeria'
+import type { Gustos, Heladeria } from '../model/heladeria'
+import { BACKEND_URL } from './constants'
 
 async function httpRequest<T>(request: RequestInfo): Promise<T> {
   const response = await fetch(request)
@@ -40,8 +39,8 @@ async function crearDuenio(nombreCompleto: string) {
   return customRequest<Duenio>('/duenios/crear', { nombreCompleto })
 }
 
-async function deleteGustos(heladeriaId: number, gusto: GustoObject) {
-  return customRequest<Heladeria>(`/heladerias/${heladeriaId}/eliminarGustos`, { [gusto.nombre]: null }, 'DELETE')
+async function deleteGustos(heladeriaId: number, gusto: Gustos) {
+  return customRequest<Heladeria>(`/heladerias/${heladeriaId}/eliminarGustos`, gusto, 'DELETE')
 }
 
 export default { buscarHeladerias, fetchById, fetchDuenios, crearDuenio, deleteGustos }
