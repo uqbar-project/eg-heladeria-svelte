@@ -43,4 +43,12 @@ async function deleteGustos(heladeriaId: number, gusto: Gustos) {
   return customRequest<Heladeria>(`/heladerias/${heladeriaId}/eliminarGustos`, gusto, 'DELETE')
 }
 
-export default { buscarHeladerias, fetchById, fetchDuenios, crearDuenio, deleteGustos }
+async function agregarGustos(heladeriaId: number, gusto: Gustos) {
+  return customRequest<Heladeria>(`/heladerias/${heladeriaId}/agregarGustos`, gusto)
+}
+
+async function actualizar(heladeria: Heladeria) {
+  return customRequest<Heladeria>(`/heladerias/${heladeria.id}/actualizar`, heladeria, 'PATCH')
+}
+
+export default { buscarHeladerias, fetchById, fetchDuenios, crearDuenio, deleteGustos, agregarGustos, actualizar }

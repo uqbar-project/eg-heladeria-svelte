@@ -6,12 +6,16 @@
   import heladeriaService from '../service/heladeria-service'
 
   export let id: number
+  let heladeriaOriginal: Heladeria
   let heladeria: Heladeria
   let listaDuenios: Duenio[]
   let nombreNuevoDuenio: string
+  let nombreNuevoGusto: string
+  let dificultadNuevoGusto: number
 
   async function getHeladeria() {
     heladeria = await heladeriaService.fetchById(id)
+    heladeriaOriginal = { ...heladeria }
   }
 
   async function getDuenios() {
@@ -28,6 +32,21 @@
   async function eliminarGusto(gusto: Gustos) {
     heladeria = await heladeriaService.deleteGustos(heladeria.id, gusto)
   }
+
+  async function agregarGusto() {
+    heladeria = await heladeriaService.agregarGustos(heladeria.id, { [nombreNuevoGusto]: dificultadNuevoGusto })
+  }
+
+  async function actualizarHeladeria() {
+    heladeria = await heladeriaService.actualizar(heladeria)
+    heladeriaOriginal = { ...heladeria }
+  }
+
+  $: hayCambiosPendientes =
+    heladeria &&
+    (heladeriaOriginal.nombre != heladeria.nombre ||
+      heladeriaOriginal.tipoHeladeria != heladeria.tipoHeladeria ||
+      heladeriaOriginal.duenio.id != heladeria.duenio.id)
 
   onMount(async () => {
     await getHeladeria()
@@ -48,7 +67,7 @@
     <label for="duenio">Dueño</label>
     <select bind:value={heladeria.duenio} id="duenio">
       {#each listaDuenios as duenio}
-        <option value={duenio}>
+        <option selected={duenio.id === heladeria.duenio.id} value={duenio}>
           {duenio.nombreCompleto}
         </option>
       {/each}
@@ -71,13 +90,13 @@
         </tr>
       {/each}
     </table>
+    <label for="nuevoGusto">Nuevo gusto</label>
+    <input type="text" id="nuevoGusto" bind:value={nombreNuevoGusto} />
+    <label for="dificultad">Dificultad</label>
+    <input type="number" id="dificultad" bind:value={dificultadNuevoGusto} />
+    <button on:click={agregarGusto} disabled={!nombreNuevoGusto || !dificultadNuevoGusto}>Agregar gusto</button>
 
-    <div>
-      {heladeria.id}
-      {heladeria.nombre}
-      {heladeria.tipoHeladeria}
-      {heladeria.duenio.nombreCompleto}
-    </div>
+    <button on:click={actualizarHeladeria} disabled={!hayCambiosPendientes}>Actualizar heladeria</button>
   {/if}
 </div>
 
