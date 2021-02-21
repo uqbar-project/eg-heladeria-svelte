@@ -6,6 +6,7 @@ body {
 }
 
 body {
+  background-color: #a1eaea;
   color: #333;
   margin: 0;
   padding: 8px;
@@ -67,3 +68,13 @@ button:focus {
   border-color: #666;
 }
 
+.card {
+  background-color: #fff8f8;
+  border-radius: 7px;
+  box-shadow: 0 4px 8px 0 #999;
+}
+
+.ancho {
+  width: 40rem;
+  margin: auto;
+}

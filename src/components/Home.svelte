@@ -16,24 +16,28 @@
 </script>
 
 <main>
-  <h1>Heladerias</h1>
-  <h3>Buscar por nombre</h3>
-  <input type="text" name="input-buscar" id="input-buscar" bind:value={nombreBuscar} />
-  <button on:click={getHeladerias}>Buscar</button>
-  <label for="lista-resultados" />
-  <table>
-    <tr>
-      <th>Nombre</th>
-      <th>Dueño</th>
-    </tr>
-    {#each heladerias as heladeria}
-      <tr>
-        <td>{heladeria.nombre}</td>
-        <td>{heladeria.duenio.nombreCompleto}</td>
-        <td><button on:click={() => editarHeladeria(heladeria)}>editar</button></td>
-      </tr>
-    {/each}
-  </table>
+  <div class="card ancho">
+    <h1>Heladerias</h1>
+    <h3>Buscar por nombre</h3>
+    <input type="text" name="input-buscar" id="input-buscar" bind:value={nombreBuscar} />
+    <button on:click={getHeladerias}>Buscar</button>
+    <label for="lista-resultados" />
+    {#if heladerias.length != 0}
+      <table>
+        <thead>
+          <th>Nombre</th>
+          <th>Dueño</th>
+        </thead>
+        {#each heladerias as heladeria}
+          <tr>
+            <td>{heladeria.nombre}</td>
+            <td>{heladeria.duenio.nombreCompleto}</td>
+            <td><img height="25px" alt="edit" src="assets/edit-icon.svg" on:click={() => editarHeladeria(heladeria)}/></td>
+          </tr>
+        {/each}
+      </table>
+    {/if}
+  </div>
 </main>
 
 <style>
@@ -45,9 +49,24 @@
   }
   table {
     margin: 0 auto;
+    border-spacing: 0 3px;
+    padding: 1.5rem;
   }
+
+  td {
+    padding: 0 1rem;
+  }
+
   tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #ff749d;
+  }
+  tr:nth-child(odd) {
+    background-color: #99cffa;
+  }
+
+  img {
+    padding: 1rem 0;
+    cursor: pointer;
   }
 
   @media (min-width: 640px) {
