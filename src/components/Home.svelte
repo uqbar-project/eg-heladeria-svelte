@@ -18,7 +18,7 @@
 <main>
   <div class="card ancho">
     <h1>Heladerias</h1>
-    <h3>Buscar por nombre</h3>
+    <label for="input-buscar">Buscar por nombre</label>
     <input type="text" name="input-buscar" id="input-buscar" bind:value={nombreBuscar} />
     <button on:click={getHeladerias}>Buscar</button>
     <label for="lista-resultados" />
@@ -32,7 +32,14 @@
           <tr>
             <td>{heladeria.nombre}</td>
             <td>{heladeria.duenio.nombreCompleto}</td>
-            <td><img height="25px" alt="edit" src="assets/edit-icon.svg" on:click={() => editarHeladeria(heladeria)}/></td>
+            <td
+              ><img
+                height="25px"
+                alt="edit"
+                src="assets/edit-icon.svg"
+                on:click={() => editarHeladeria(heladeria)}
+              /></td
+            >
           </tr>
         {/each}
       </table>

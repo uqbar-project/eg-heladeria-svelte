@@ -61,7 +61,7 @@
 
     {#each tiposHeladeria as tipoHeladeria}
       <input bind:group={heladeria.tipoHeladeria} value={tipoHeladeria} type="radio" id={tipoHeladeria} />
-      <span for={tipoHeladeria}>{tipoHeladeria}</span>
+      <label class="radio-label" for={tipoHeladeria}>{tipoHeladeria}</label>
     {/each}
 
     <label for="duenio">Dueño</label>
@@ -72,9 +72,9 @@
         </option>
       {/each}
     </select>
-
+    <label for="nuevoDuenio">Nuevo dueño</label>
     <input type="text" id="nuevoDuenio" bind:value={nombreNuevoDuenio} />
-    <button on:click={agregarDuenio} disabled={!nombreNuevoDuenio}>Agregar dueño</button>
+    <button on:click={agregarDuenio} disabled={!nombreNuevoDuenio}>Agregar</button>
 
     <table>
       <tr>
@@ -101,4 +101,8 @@
 </div>
 
 <style>
+  .radio-label {
+    display: inline;
+    margin-right: 1rem;
+  }
 </style>
