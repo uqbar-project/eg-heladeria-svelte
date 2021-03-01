@@ -30,11 +30,13 @@
   }
 
   async function eliminarGusto(gusto: Gustos) {
-    heladeria = await heladeriaService.deleteGustos(heladeria.id, gusto)
+    const { gustos } = await heladeriaService.deleteGustos(heladeria.id, gusto)
+    heladeria.gustos = gustos
   }
 
   async function agregarGusto() {
-    heladeria = await heladeriaService.agregarGustos(heladeria.id, { [nombreNuevoGusto]: dificultadNuevoGusto })
+    const { gustos } = await heladeriaService.agregarGustos(heladeria.id, { [nombreNuevoGusto]: dificultadNuevoGusto })
+    heladeria.gustos = gustos
   }
 
   async function actualizarHeladeria() {
