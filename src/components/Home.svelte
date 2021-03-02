@@ -4,7 +4,7 @@
   import heladeriaService from '../service/heladeria-service'
 
   let heladerias: Heladeria[] = []
-  let nombreBuscar: string = ''
+  let nombreBuscar = ''
 
   async function getHeladerias() {
     heladerias = await heladeriaService.buscarHeladerias(nombreBuscar)

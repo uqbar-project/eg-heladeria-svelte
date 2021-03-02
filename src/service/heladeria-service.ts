@@ -13,7 +13,7 @@ async function httpRequest<T>(request: RequestInfo): Promise<T> {
   return response.json()
 }
 
-async function customRequest<T>(route: string, body: Object, method: string = 'POST') {
+async function customRequest<T>(route: string, body: Partial<T>, method = 'POST') {
   return httpRequest<T>(
     new Request(`${BACKEND_URL}${route}`, {
       method,
@@ -23,31 +23,31 @@ async function customRequest<T>(route: string, body: Object, method: string = 'P
   )
 }
 
-async function buscarHeladerias(nombreBuscar: string) {
+async function buscarHeladerias(nombreBuscar: string): Promise<Heladeria[]> {
   return httpRequest<Heladeria[]>(`${BACKEND_URL}/heladerias/buscar/${nombreBuscar}`)
 }
 
-async function fetchById(heladeriaId: number) {
+async function fetchById(heladeriaId: number): Promise<Heladeria> {
   return httpRequest<Heladeria>(`${BACKEND_URL}/heladerias/id/${heladeriaId}`)
 }
 
-async function fetchDuenios() {
+async function fetchDuenios(): Promise<Duenio[]> {
   return httpRequest<Duenio[]>(`${BACKEND_URL}/duenios/`)
 }
 
-async function crearDuenio(nombreCompleto: string) {
+async function crearDuenio(nombreCompleto: string): Promise<Duenio> {
   return customRequest<Duenio>('/duenios/crear', { nombreCompleto })
 }
 
-async function deleteGustos(heladeriaId: number, gusto: Gustos) {
+async function deleteGustos(heladeriaId: number, gusto: Gustos): Promise<Heladeria> {
   return customRequest<Heladeria>(`/heladerias/${heladeriaId}/eliminarGustos`, gusto, 'DELETE')
 }
 
-async function agregarGustos(heladeriaId: number, gusto: Gustos) {
+async function agregarGustos(heladeriaId: number, gusto: Gustos): Promise<Heladeria> {
   return customRequest<Heladeria>(`/heladerias/${heladeriaId}/agregarGustos`, gusto)
 }
 
-async function actualizar(heladeria: Heladeria) {
+async function actualizar(heladeria: Heladeria): Promise<Heladeria> {
   return customRequest<Heladeria>(`/heladerias/${heladeria.id}/actualizar`, heladeria, 'PATCH')
 }
 
