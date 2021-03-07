@@ -2,7 +2,6 @@ html,
 body {
   position: relative;
   width: 100%;
-  height: 100%;
 }
 
 body {
@@ -103,4 +102,12 @@ h1 {
 }
 .botonera button {
   margin: 3rem 1rem 0.5rem 1rem;
+}
+
+.centrado {
+  text-align: center;
+}
+
+.vertical {
+  flex-direction: column;
 }

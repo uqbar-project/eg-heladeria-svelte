@@ -38,6 +38,8 @@
   async function agregarGusto() {
     const { gustos } = await heladeriaService.agregarGustos(heladeria.id, { [nombreNuevoGusto]: dificultadNuevoGusto })
     heladeria.gustos = gustos
+    nombreNuevoGusto = ''
+    dificultadNuevoGusto = null
   }
 
   async function actualizarHeladeria() {
@@ -71,18 +73,22 @@
           {/each}
         </div>
       </div>
-      <div>
-        <label for="duenio">Dueño</label>
-        <select bind:value={heladeria.duenio} id="duenio">
-          {#each listaDuenios as duenio}
-            <option selected={duenio.id === heladeria.duenio.id} value={duenio}>
-              {duenio.nombreCompleto}
-            </option>
-          {/each}
-        </select>
-        <label for="nuevoDuenio">Nuevo dueño</label>
-        <input type="text" id="nuevoDuenio" bind:value={nombreNuevoDuenio} />
-        <button on:click={agregarDuenio} disabled={!nombreNuevoDuenio}>Agregar</button>
+      <div class="contenedor vertical">
+        <div>
+          <label for="duenio">Dueño</label>
+          <select bind:value={heladeria.duenio} id="duenio">
+            {#each listaDuenios as duenio}
+              <option selected={duenio.id === heladeria.duenio.id} value={duenio}>
+                {duenio.nombreCompleto}
+              </option>
+            {/each}
+          </select>
+        </div>
+        <div>
+          <label for="nuevoDuenio">Nuevo dueño</label>
+          <input type="text" id="nuevoDuenio" bind:value={nombreNuevoDuenio} />
+          <button on:click={agregarDuenio} disabled={!nombreNuevoDuenio}>Agregar</button>
+        </div>
       </div>
     </div>
 
@@ -96,8 +102,15 @@
         {#each Object.entries(heladeria.gustos) as [nombre, dificultad]}
           <tr>
             <td>{nombre}</td>
-            <td>{dificultad}</td>
-            <td><button on:click={() => eliminarGusto({ [nombre]: dificultad })}>eliminar</button></td>
+            <td class="centrado">{dificultad}</td>
+            <td
+              ><img
+                src="../assets/trash.svg"
+                height="20px"
+                alt="eliminar"
+                on:click={() => eliminarGusto({ [nombre]: dificultad })}
+              /></td
+            >
           </tr>
         {/each}
       </table>
