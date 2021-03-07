@@ -56,7 +56,7 @@
   })
 </script>
 
-<div>
+<div class="card ancho">
   {#if heladeria && listaDuenios}
     <label for="nombre">Nombre</label>
     <input bind:value={heladeria.nombre} id="nombre" type="text" />

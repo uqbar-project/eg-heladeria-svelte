@@ -72,9 +72,10 @@ button:focus {
   background-color: #fff8f8;
   border-radius: 7px;
   box-shadow: 0 4px 8px 0 #999;
+  padding: 4rem;
 }
 
 .ancho {
   width: 40rem;
-  margin: auto;
+  margin: 3rem auto;
 }
