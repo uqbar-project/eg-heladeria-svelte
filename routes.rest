@@ -1,6 +1,6 @@
 # Para usar este archivo, hay que instalar la extensión "REST Client" desde las extensiones de VS Code.
 
-GET http://localhost:8080/heladerias/buscar/t
+GET http://localhost:8080/heladerias/buscar/tu
 
 ###
 
@@ -13,4 +13,13 @@ content-type: application/json
 
 {
     "pistacchio": 12
+}
+
+###
+
+PATCH http://localhost:8080/heladerias/1/actualizar 
+content-type: application/json
+
+{
+  "nombre": "nuevoNombre"
 }
