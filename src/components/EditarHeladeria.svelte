@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
+  import { navigate } from 'svelte-routing'
   import type { Duenio } from '../model/duenio'
   import type { Gustos, Heladeria } from '../model/heladeria'
   import { tiposHeladeria } from '../model/heladeria'
@@ -99,6 +100,7 @@
     <button on:click={agregarGusto} disabled={!nombreNuevoGusto || !dificultadNuevoGusto}>Agregar gusto</button>
 
     <button on:click={actualizarHeladeria} disabled={!hayCambiosPendientes}>Actualizar heladeria</button>
+    <button on:click={() => navigate('/')}>Volver</button>
   {/if}
 </div>
 
