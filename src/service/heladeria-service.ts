@@ -32,23 +32,23 @@ async function fetchById(heladeriaId: number): Promise<Heladeria> {
 }
 
 async function fetchDuenios(): Promise<Duenio[]> {
-  return httpRequest<Duenio[]>(`${BACKEND_URL}/duenios/`)
+  return httpRequest<Duenio[]>(`${BACKEND_URL}/duenios`)
 }
 
 async function crearDuenio(nombreCompleto: string): Promise<Duenio> {
-  return customRequest<Duenio>('/duenios/crear', { nombreCompleto })
+  return customRequest<Duenio>('/duenios', { nombreCompleto })
 }
 
 async function deleteGustos(heladeriaId: number, gusto: Gustos): Promise<Heladeria> {
-  return customRequest<Heladeria>(`/heladerias/${heladeriaId}/eliminarGustos`, gusto, 'DELETE')
+  return customRequest<Heladeria>(`/heladerias/${heladeriaId}/gustos`, gusto, 'DELETE')
 }
 
 async function agregarGustos(heladeriaId: number, gusto: Gustos): Promise<Heladeria> {
-  return customRequest<Heladeria>(`/heladerias/${heladeriaId}/agregarGustos`, gusto)
+  return customRequest<Heladeria>(`/heladerias/${heladeriaId}/gustos`, gusto)
 }
 
 async function actualizar(heladeria: Heladeria): Promise<Heladeria> {
-  return customRequest<Heladeria>(`/heladerias/${heladeria.id}/actualizar`, heladeria, 'PATCH')
+  return customRequest<Heladeria>(`/heladerias/${heladeria.id}`, heladeria, 'PATCH')
 }
 
 export default { buscarHeladerias, fetchById, fetchDuenios, crearDuenio, deleteGustos, agregarGustos, actualizar }
