@@ -72,10 +72,35 @@ button:focus {
   background-color: #fff8f8;
   border-radius: 7px;
   box-shadow: 0 4px 8px 0 #999;
-  padding: 4rem;
+  padding: 1rem 4rem;
 }
 
 .ancho {
   width: 40rem;
   margin: 3rem auto;
+}
+
+.tipos-heladeria {
+  margin: 1rem auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+.contenedor {
+  display: flex;
+  justify-content: space-between;
+}
+
+#gustos {
+  margin-top: 1rem;
+}
+
+.botonera {
+  display: flex;
+  justify-content: center;
+}
+.botonera button {
+  margin: 3rem 1rem 0.5rem 1rem;
 }

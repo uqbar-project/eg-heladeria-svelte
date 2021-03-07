@@ -59,48 +59,61 @@
 
 <div class="card ancho">
   {#if heladeria && listaDuenios}
-    <label for="nombre">Nombre</label>
-    <input bind:value={heladeria.nombre} id="nombre" type="text" />
+    <h1>Editar {heladeria.nombre}</h1>
+    <div id="datos-principales" class="contenedor">
+      <div>
+        <label for="nombre">Nombre</label>
+        <input bind:value={heladeria.nombre} id="nombre" type="text" />
+        <div class="tipos-heladeria">
+          {#each tiposHeladeria as tipoHeladeria}
+            <input bind:group={heladeria.tipoHeladeria} value={tipoHeladeria} type="radio" id={tipoHeladeria} />
+            <label class="radio-label" for={tipoHeladeria}>{tipoHeladeria}</label> <br />
+          {/each}
+        </div>
+      </div>
+      <div>
+        <label for="duenio">Dueño</label>
+        <select bind:value={heladeria.duenio} id="duenio">
+          {#each listaDuenios as duenio}
+            <option selected={duenio.id === heladeria.duenio.id} value={duenio}>
+              {duenio.nombreCompleto}
+            </option>
+          {/each}
+        </select>
+        <label for="nuevoDuenio">Nuevo dueño</label>
+        <input type="text" id="nuevoDuenio" bind:value={nombreNuevoDuenio} />
+        <button on:click={agregarDuenio} disabled={!nombreNuevoDuenio}>Agregar</button>
+      </div>
+    </div>
 
-    {#each tiposHeladeria as tipoHeladeria}
-      <input bind:group={heladeria.tipoHeladeria} value={tipoHeladeria} type="radio" id={tipoHeladeria} />
-      <label class="radio-label" for={tipoHeladeria}>{tipoHeladeria}</label>
-    {/each}
-
-    <label for="duenio">Dueño</label>
-    <select bind:value={heladeria.duenio} id="duenio">
-      {#each listaDuenios as duenio}
-        <option selected={duenio.id === heladeria.duenio.id} value={duenio}>
-          {duenio.nombreCompleto}
-        </option>
-      {/each}
-    </select>
-    <label for="nuevoDuenio">Nuevo dueño</label>
-    <input type="text" id="nuevoDuenio" bind:value={nombreNuevoDuenio} />
-    <button on:click={agregarDuenio} disabled={!nombreNuevoDuenio}>Agregar</button>
-
-    <table>
-      <tr>
-        <th>Gusto</th>
-        <th>Dificultad</th>
-      </tr>
-
-      {#each Object.entries(heladeria.gustos) as [nombre, dificultad]}
+    <div id="gustos" class="contenedor">
+      <table>
         <tr>
-          <td>{nombre}</td>
-          <td>{dificultad}</td>
-          <td><button on:click={() => eliminarGusto({ [nombre]: dificultad })}>eliminar</button></td>
+          <th>Gusto</th>
+          <th>Dificultad</th>
         </tr>
-      {/each}
-    </table>
-    <label for="nuevoGusto">Nuevo gusto</label>
-    <input type="text" id="nuevoGusto" bind:value={nombreNuevoGusto} />
-    <label for="dificultad">Dificultad</label>
-    <input type="number" id="dificultad" min="1" max="10" bind:value={dificultadNuevoGusto} />
-    <button on:click={agregarGusto} disabled={!nombreNuevoGusto || !dificultadNuevoGusto}>Agregar gusto</button>
 
-    <button on:click={actualizarHeladeria} disabled={!hayCambiosPendientes}>Actualizar heladeria</button>
-    <button on:click={() => navigate('/')}>Volver</button>
+        {#each Object.entries(heladeria.gustos) as [nombre, dificultad]}
+          <tr>
+            <td>{nombre}</td>
+            <td>{dificultad}</td>
+            <td><button on:click={() => eliminarGusto({ [nombre]: dificultad })}>eliminar</button></td>
+          </tr>
+        {/each}
+      </table>
+      <div>
+        <label for="nuevoGusto">Nuevo gusto</label>
+        <input type="text" id="nuevoGusto" bind:value={nombreNuevoGusto} />
+        <label for="dificultad">Dificultad</label>
+        <input type="number" id="dificultad" min="1" max="10" bind:value={dificultadNuevoGusto} />
+        <button on:click={agregarGusto} disabled={!nombreNuevoGusto || !dificultadNuevoGusto}>Agregar gusto</button>
+      </div>
+    </div>
+
+    <div class="botonera">
+      <button on:click={actualizarHeladeria} disabled={!hayCambiosPendientes}>Actualizar heladeria</button>
+      <button on:click={() => navigate('/')}>Volver</button>
+    </div>
   {/if}
 </div>
 
