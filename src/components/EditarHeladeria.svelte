@@ -95,7 +95,7 @@
     <label for="nuevoGusto">Nuevo gusto</label>
     <input type="text" id="nuevoGusto" bind:value={nombreNuevoGusto} />
     <label for="dificultad">Dificultad</label>
-    <input type="number" id="dificultad" bind:value={dificultadNuevoGusto} />
+    <input type="number" id="dificultad" min="1" max="10" bind:value={dificultadNuevoGusto} />
     <button on:click={agregarGusto} disabled={!nombreNuevoGusto || !dificultadNuevoGusto}>Agregar gusto</button>
 
     <button on:click={actualizarHeladeria} disabled={!hayCambiosPendientes}>Actualizar heladeria</button>
