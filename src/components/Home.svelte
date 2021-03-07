@@ -13,13 +13,19 @@
   function editarHeladeria(heladeria: Heladeria) {
     navigate(`/editar-heladeria/${heladeria.id}`)
   }
+
+  function handleKeyPress(event) {
+    if (event.code === 'Enter') {
+      getHeladerias()
+    }
+  }
 </script>
 
 <main>
   <div class="card ancho">
     <h1>Heladerias</h1>
     <label for="input-buscar">Buscar por nombre</label>
-    <input type="text" name="input-buscar" id="input-buscar" bind:value={nombreBuscar} />
+    <input type="text" name="input-buscar" id="input-buscar" bind:value={nombreBuscar} on:keypress={handleKeyPress} />
     <button on:click={getHeladerias}>Buscar</button>
     <label for="lista-resultados" />
     {#if heladerias.length != 0}
