@@ -9,8 +9,8 @@
 
   async function getHeladerias() {
     try {
-      toast.removeLastToast()
       heladerias = await heladeriaService.buscarHeladerias(nombreBuscar)
+      toast.removeLastToast()
       if (heladerias.length == 0) {
         toast.push(`No se encontraron heladerias`)
       }

@@ -1,5 +1,7 @@
 import { toast as svelteToast } from '@zerodevx/svelte-toast'
 
+const ERROR_CONEXION = "Error al conectarse con el servidor"
+
 const success = (mensaje: string): void => {
     removeLastToast()
     svelteToast.push(mensaje, {
@@ -12,7 +14,8 @@ const success = (mensaje: string): void => {
 
 const error = (error: { mensaje: string }): void => {
     removeLastToast()
-    const mensaje = error.mensaje ? error.mensaje : "Error al conectarse con el servidor"
+    const mensaje = error.mensaje ? error.mensaje : ERROR_CONEXION
+
     svelteToast.push(mensaje, {
         theme: {
             '--toastBackground': '#F56565',

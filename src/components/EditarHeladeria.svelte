@@ -16,20 +16,12 @@
   let dificultadNuevoGusto: number
 
   async function getHeladeria() {
-    try {
-      heladeria = await heladeriaService.fetchById(id)
-      heladeriaOriginal = { ...heladeria }
-    } catch (error) {
-      toast.error(error)
-    }
+    heladeria = await heladeriaService.fetchById(id)
+    heladeriaOriginal = { ...heladeria }
   }
 
   async function getDuenios() {
-    try {
-      listaDuenios = await heladeriaService.fetchDuenios()
-    } catch (error) {
-      toast.error(error)
-    }
+    listaDuenios = await heladeriaService.fetchDuenios()
   }
 
   async function agregarDuenio() {
@@ -67,7 +59,7 @@
       toast.error(error)
     }
   }
-  
+
   async function actualizarHeladeria() {
     try {
       heladeria = await heladeriaService.actualizar(heladeria)
@@ -85,8 +77,12 @@
       heladeriaOriginal.duenio.id != heladeria.duenio.id)
 
   onMount(async () => {
-    await getHeladeria()
-    await getDuenios()
+    try {
+      await getHeladeria()
+      await getDuenios()
+    } catch (error) {
+      toast.error(error)
+    }
   })
 </script>
 
