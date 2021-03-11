@@ -6,7 +6,9 @@
   export let url = ''
 </script>
 
-<Router {url}>
-  <Route path="/" component={Home} />
-  <Route path="editar-heladeria/:id" component={EditarHeladeria} />
-</Router>
+<main>
+  <Router {url}>
+    <Route path="/" component={Home} />
+    <Route path="editar-heladeria/:id" component={EditarHeladeria} />
+  </Router>
+</main>

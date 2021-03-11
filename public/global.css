@@ -1,3 +1,12 @@
+:root {
+  --color-primario: #f7abc1;
+  --color-secundario: #99cffa;
+  --disabled-primario: #ecd3da;
+  --disabled-secundario: #e0f1ff;
+  --ancho-default: 40rem;
+  --background: #a1eaea;
+}
+
 html,
 body {
   position: relative;
@@ -5,7 +14,7 @@ body {
 }
 
 body {
-  background-color: #a1eaea;
+  background-color: var(--background);
   color: #333;
   margin: 0;
   padding: 8px;
@@ -43,6 +52,7 @@ textarea {
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 2px;
+  max-width: 16rem;
 }
 
 input:disabled {
@@ -52,7 +62,11 @@ input:disabled {
 button {
   color: #333;
   background-color: #f4f4f4;
+  border-radius: 7px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  padding: 0.5rem;
   outline: none;
+  text-decoration: none;
 }
 
 button:disabled {
@@ -71,20 +85,12 @@ button:focus {
   background-color: #fff8f8;
   border-radius: 7px;
   box-shadow: 0 4px 8px 0 #999;
-  padding: 1rem 4rem;
+  padding: 1rem;
 }
 
 .ancho {
-  width: 40rem;
+  max-width: var(--ancho-default);
   margin: 3rem auto;
-}
-
-.tipos-heladeria {
-  margin: 1rem auto;
-}
-
-h1 {
-  text-align: center;
 }
 
 .contenedor {
@@ -101,7 +107,7 @@ h1 {
   justify-content: center;
 }
 .botonera button {
-  margin: 3rem 1rem 0.5rem 1rem;
+  margin-right: 1rem;
 }
 
 .centrado {
@@ -110,4 +116,58 @@ h1 {
 
 .vertical {
   flex-direction: column;
+}
+
+button:enabled,
+img {
+  cursor: pointer;
+}
+
+.titulo {
+  margin-top: 0;
+}
+
+td,
+select,
+.titulo {
+  overflow: hidden;
+  /* white-space: nowrap; */
+  text-overflow: ellipsis;
+}
+
+table {
+  width: 100%;
+  border-spacing: 0 0.5rem;
+  table-layout: fixed;
+}
+
+td {
+  padding: 0.5rem;
+}
+
+th {
+  text-align: center;
+}
+
+@media (min-width: 540px) and (max-width: 750px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 540px) {
+  :root {
+    --ancho-default: 20rem;
+  }
+}
+
+@media (max-width: 350px) {
+  html {
+    font-size: 11px;
+  }
+
+  select,
+  input {
+    max-width: 90%;
+  }
 }

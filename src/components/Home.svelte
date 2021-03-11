@@ -21,11 +21,19 @@
   }
 </script>
 
-<main>
-  <div class="card ancho">
-    <h1>Heladerias</h1>
-    <label for="input-buscar">Buscar por nombre</label>
-    <input type="text" name="input-buscar" id="input-buscar" bind:value={nombreBuscar} on:keypress={handleKeyPress} />
+<div class="card ancho centrado">
+  <div>
+    <h1 class="titulo centrado">Heladerias</h1>
+  </div>
+  <div>
+    <input
+      type="text"
+      name="input-buscar"
+      placeholder="Buscar por nombre"
+      id="input-buscar"
+      bind:value={nombreBuscar}
+      on:keypress={handleKeyPress}
+    />
     <button on:click={getHeladerias}>Buscar</button>
     <label for="lista-resultados" />
     {#if heladerias.length != 0}
@@ -33,12 +41,13 @@
         <thead>
           <th>Nombre</th>
           <th>Dueño</th>
+          <th class="columna-editar" />
         </thead>
         {#each heladerias as heladeria}
           <tr>
-            <td>{heladeria.nombre}</td>
-            <td>{heladeria.duenio.nombreCompleto}</td>
-            <td
+            <td title={heladeria.nombre}>{heladeria.nombre}</td>
+            <td title={heladeria.duenio.nombreCompleto}>{heladeria.duenio.nombreCompleto}</td>
+            <td class="editar"
               ><img
                 height="25px"
                 alt="edit"
@@ -51,40 +60,41 @@
       </table>
     {/if}
   </div>
-</main>
+</div>
 
 <style>
-  main {
-    text-align: center;
-    padding: 1em;
-    max-width: 240px;
-    margin: 0 auto;
-  }
   table {
     margin: 0 auto;
-    border-spacing: 0 3px;
-    padding: 1.5rem;
-  }
-
-  td {
-    padding: 0 1rem;
   }
 
   tr:nth-child(even) {
-    background-color: #ff749d;
+    background-color: var(--color-primario);
   }
   tr:nth-child(odd) {
-    background-color: #99cffa;
+    background-color: var(--color-secundario);
   }
 
   img {
     padding: 1rem 0;
-    cursor: pointer;
   }
 
-  @media (min-width: 640px) {
-    main {
-      max-width: none;
+  input {
+    height: 3rem;
+    width: 60%;
+    padding-left: 1rem;
+  }
+  
+  button {
+    padding: 0.78rem;
+  }
+
+  .columna-editar {
+    width: 20%;
+  }
+
+  @media (max-width: 540px) {
+    table {
+      font-size: 0.8rem;
     }
   }
 </style>

@@ -61,11 +61,14 @@
 
 <div class="card ancho">
   {#if heladeria && listaDuenios}
-    <h1>Editar {heladeria.nombre}</h1>
-    <div id="datos-principales" class="contenedor">
+    <h1 title={heladeria.nombre} class="titulo centrado full-ancho">Editar {heladeria.nombre}</h1>
+    <h2 class="full-ancho">Datos</h2>
+    <div id="datos-principales" class="contenedor vertical">
       <div>
         <label for="nombre">Nombre</label>
-        <input bind:value={heladeria.nombre} id="nombre" type="text" />
+        <input maxlength="30" bind:value={heladeria.nombre} id="nombre" type="text" />
+      </div>
+      <div>
         <div class="tipos-heladeria">
           {#each tiposHeladeria as tipoHeladeria}
             <input bind:group={heladeria.tipoHeladeria} value={tipoHeladeria} type="radio" id={tipoHeladeria} />
@@ -73,37 +76,39 @@
           {/each}
         </div>
       </div>
-      <div class="contenedor vertical">
-        <div>
-          <label for="duenio">Dueño</label>
-          <select bind:value={heladeria.duenio} id="duenio">
-            {#each listaDuenios as duenio}
-              <option selected={duenio.id === heladeria.duenio.id} value={duenio}>
-                {duenio.nombreCompleto}
-              </option>
-            {/each}
-          </select>
-        </div>
-        <div>
-          <label for="nuevoDuenio">Nuevo dueño</label>
-          <input type="text" id="nuevoDuenio" bind:value={nombreNuevoDuenio} />
-          <button on:click={agregarDuenio} disabled={!nombreNuevoDuenio}>Agregar</button>
-        </div>
+    </div>
+    <div class="contenedor vertical">
+      <div>
+        <label for="duenio">Dueño</label>
+        <select title={heladeria.duenio.nombreCompleto} bind:value={heladeria.duenio} id="duenio">
+          {#each listaDuenios as duenio}
+            <option selected={duenio.id === heladeria.duenio.id} value={duenio}>
+              {duenio.nombreCompleto}
+            </option>
+          {/each}
+        </select>
+      </div>
+      <div>
+        <label for="nuevoDuenio">Nuevo dueño</label>
+        <input maxlength="100" type="text" id="nuevoDuenio" bind:value={nombreNuevoDuenio} />
+        <button class="boton-agregar" on:click={agregarDuenio} disabled={!nombreNuevoDuenio}>Agregar</button>
       </div>
     </div>
 
-    <div id="gustos" class="contenedor">
+    <h2 class="full-ancho">Gustos</h2>
+    <div class="contenedor">
       <table>
         <tr>
-          <th>Gusto</th>
+          <th class="columna-gusto">Gusto</th>
           <th>Dificultad</th>
+          <th />
         </tr>
 
         {#each Object.entries(heladeria.gustos) as [nombre, dificultad]}
           <tr>
-            <td>{nombre}</td>
-            <td class="centrado">{dificultad}</td>
-            <td
+            <td title={nombre}>{nombre}</td>
+            <td class="td-dificultad">{dificultad}</td>
+            <td class="td-eliminar"
               ><img
                 src="../assets/trash.svg"
                 height="20px"
@@ -114,17 +119,21 @@
           </tr>
         {/each}
       </table>
-      <div>
-        <label for="nuevoGusto">Nuevo gusto</label>
-        <input type="text" id="nuevoGusto" bind:value={nombreNuevoGusto} />
-        <label for="dificultad">Dificultad</label>
-        <input type="number" id="dificultad" min="1" max="10" bind:value={dificultadNuevoGusto} />
-        <button on:click={agregarGusto} disabled={!nombreNuevoGusto || !dificultadNuevoGusto}>Agregar gusto</button>
-      </div>
+    </div>
+    <div>
+      <label for="nuevoGusto">Nuevo gusto</label>
+      <input maxlength="50" type="text" id="nuevoGusto" bind:value={nombreNuevoGusto} />
+      <label for="dificultad">Dificultad</label>
+      <input type="number" id="dificultad" min="1" max="10" bind:value={dificultadNuevoGusto} />
+      <button class="boton-agregar" on:click={agregarGusto} disabled={!nombreNuevoGusto || !dificultadNuevoGusto}
+        >Agregar gusto</button
+      >
     </div>
 
-    <div class="botonera">
-      <button on:click={actualizarHeladeria} disabled={!hayCambiosPendientes}>Actualizar heladeria</button>
+    <div class="botonera full-ancho">
+      <button class="boton-actualizar" on:click={actualizarHeladeria} disabled={!hayCambiosPendientes}
+        >Actualizar heladeria</button
+      >
       <button on:click={() => navigate('/')}>Volver</button>
     </div>
   {/if}
@@ -134,5 +143,61 @@
   .radio-label {
     display: inline;
     margin-right: 1rem;
+  }
+
+  .card {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 4rem;
+    padding: 1rem 2rem;
+  }
+
+  .titulo {
+    margin-bottom: 0;
+  }
+
+  .full-ancho {
+    grid-column: 1/3;
+  }
+
+  th {
+    text-align: left;
+  }
+
+  .columna-gusto {
+    width: 60%;
+  }
+
+  .td-dificultad {
+    text-align: center;
+  }
+
+  .td-eliminar {
+    text-align: right;
+    padding-right: 0;
+  }
+
+  .boton-agregar {
+    background-color: var(--color-primario);
+  }
+  .boton-agregar:disabled {
+    background-color: var(--disabled-primario);
+  }
+  .boton-actualizar:enabled {
+    background-color: var(--color-secundario);
+  }
+  .boton-actualizar:disabled {
+    background-color: var(--disabled-secundario);
+  }
+
+  h2 {
+    margin: 0;
+  }
+
+  @media (max-width: 540px) {
+    .card {
+      display: flex;
+      flex-direction: column;
+    }
   }
 </style>
