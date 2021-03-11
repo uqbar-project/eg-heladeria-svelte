@@ -2,12 +2,21 @@
   import { navigate } from 'svelte-routing'
   import type { Heladeria } from '../model/heladeria'
   import heladeriaService from '../service/heladeria-service'
+  import { toast } from '../service/toast'
 
   let heladerias: Heladeria[] = []
   let nombreBuscar = ''
 
   async function getHeladerias() {
-    heladerias = await heladeriaService.buscarHeladerias(nombreBuscar)
+    try {
+      toast.removeLastToast()
+      heladerias = await heladeriaService.buscarHeladerias(nombreBuscar)
+      if (heladerias.length == 0) {
+        toast.push(`No se encontraron heladerias`)
+      }
+    } catch (error) {
+      toast.error(error)
+    }
   }
 
   function editarHeladeria(heladeria: Heladeria) {
@@ -83,7 +92,7 @@
     width: 60%;
     padding-left: 1rem;
   }
-  
+
   button {
     padding: 0.78rem;
   }

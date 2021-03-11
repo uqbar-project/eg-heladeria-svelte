@@ -7,7 +7,8 @@ async function httpRequest<T>(request: RequestInfo): Promise<T> {
 
   if (!response.ok) {
     const errorMessage = await response.text()
-    throw `Ocurrió un error - ${response.status}: ${errorMessage}`
+
+    throw { status: response.status, mensaje: errorMessage }
   }
 
   return response.json()

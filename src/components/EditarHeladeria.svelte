@@ -5,6 +5,7 @@
   import type { Gustos, Heladeria } from '../model/heladeria'
   import { tiposHeladeria } from '../model/heladeria'
   import heladeriaService from '../service/heladeria-service'
+  import { toast } from '../service/toast'
 
   export let id: number
   let heladeriaOriginal: Heladeria
@@ -15,36 +16,66 @@
   let dificultadNuevoGusto: number
 
   async function getHeladeria() {
-    heladeria = await heladeriaService.fetchById(id)
-    heladeriaOriginal = { ...heladeria }
+    try {
+      heladeria = await heladeriaService.fetchById(id)
+      heladeriaOriginal = { ...heladeria }
+    } catch (error) {
+      toast.error(error)
+    }
   }
 
   async function getDuenios() {
-    listaDuenios = await heladeriaService.fetchDuenios()
+    try {
+      listaDuenios = await heladeriaService.fetchDuenios()
+    } catch (error) {
+      toast.error(error)
+    }
   }
 
   async function agregarDuenio() {
-    const nuevoDuenio = await heladeriaService.crearDuenio(nombreNuevoDuenio)
-    listaDuenios = [...listaDuenios, nuevoDuenio]
-    nombreNuevoDuenio = ''
-    heladeria.duenio = nuevoDuenio
+    try {
+      const nuevoDuenio = await heladeriaService.crearDuenio(nombreNuevoDuenio)
+      listaDuenios = [...listaDuenios, nuevoDuenio]
+      nombreNuevoDuenio = ''
+      heladeria.duenio = nuevoDuenio
+      toast.success(`Se creó a '${nuevoDuenio.nombreCompleto}'`)
+    } catch (error) {
+      toast.error(error)
+    }
   }
 
   async function eliminarGusto(gusto: Gustos) {
-    const { gustos } = await heladeriaService.deleteGustos(heladeria.id, gusto)
-    heladeria.gustos = gustos
+    try {
+      const { gustos } = await heladeriaService.deleteGustos(heladeria.id, gusto)
+      heladeria.gustos = gustos
+      toast.success(`Gusto '${Object.keys(gusto)[0]}' eliminado!`)
+    } catch (error) {
+      toast.error(error)
+    }
   }
 
   async function agregarGusto() {
-    const { gustos } = await heladeriaService.agregarGustos(heladeria.id, { [nombreNuevoGusto]: dificultadNuevoGusto })
-    heladeria.gustos = gustos
-    nombreNuevoGusto = ''
-    dificultadNuevoGusto = null
+    try {
+      const { gustos } = await heladeriaService.agregarGustos(heladeria.id, {
+        [nombreNuevoGusto]: dificultadNuevoGusto,
+      })
+      toast.success(`Gusto '${nombreNuevoGusto}' agregado!`)
+      heladeria.gustos = gustos
+      nombreNuevoGusto = ''
+      dificultadNuevoGusto = null
+    } catch (error) {
+      toast.error(error)
+    }
   }
-
+  
   async function actualizarHeladeria() {
-    heladeria = await heladeriaService.actualizar(heladeria)
-    heladeriaOriginal = { ...heladeria }
+    try {
+      heladeria = await heladeriaService.actualizar(heladeria)
+      heladeriaOriginal = { ...heladeria }
+      toast.success(`Heladería actualizada!`)
+    } catch (error) {
+      toast.error(error)
+    }
   }
 
   $: hayCambiosPendientes =
