@@ -1,10 +1,14 @@
 :root {
   --color-primario: #f7abc1;
   --color-secundario: #99cffa;
-  --disabled-primario: #ecd3da;
-  --disabled-secundario: #e0f1ff;
-  --ancho-default: 40rem;
+  --disabled-primario: #f1d8df;
+  --disabled-secundario: #e8f0f7;
+  --ancho-default: 35rem;
   --background: #a1eaea;
+  /*toasts*/
+  --toastContainerTop: auto;
+  --toastContainerRight: auto;
+  --toastContainerLeft: calc(50vw - 8rem);
 }
 
 html,
@@ -52,6 +56,8 @@ textarea {
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 2px;
+  border-radius: 5px;
+  width: 100%;
   max-width: 16rem;
 }
 
@@ -62,15 +68,16 @@ input:disabled {
 button {
   color: #333;
   background-color: #f4f4f4;
-  border-radius: 7px;
+  border-radius: 5px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  padding: 0.5rem;
+  padding: 0.5rem 2rem;
   outline: none;
   text-decoration: none;
 }
 
 button:disabled {
-  color: #999;
+  color: #4a4a4a;
+  cursor: not-allowed;
 }
 
 button:not(:disabled):active {
@@ -93,11 +100,6 @@ button:focus {
   margin: 3rem auto;
 }
 
-.contenedor {
-  display: flex;
-  justify-content: space-between;
-}
-
 #gustos {
   margin-top: 1rem;
 }
@@ -105,6 +107,7 @@ button:focus {
 .botonera {
   display: flex;
   justify-content: center;
+  margin-top: 1rem;
 }
 .botonera button {
   margin-right: 1rem;
@@ -112,10 +115,6 @@ button:focus {
 
 .centrado {
   text-align: center;
-}
-
-.vertical {
-  flex-direction: column;
 }
 
 button:enabled,
@@ -141,15 +140,15 @@ table {
   table-layout: fixed;
 }
 
-td {
-  padding: 0.5rem;
-}
-
 th {
   text-align: center;
 }
 
 @media (min-width: 540px) and (max-width: 750px) {
+  :root {
+    --toastContainerBottom: 25rem;
+  }
+
   html {
     font-size: 12px;
   }
@@ -158,16 +157,12 @@ th {
 @media (max-width: 540px) {
   :root {
     --ancho-default: 20rem;
+    --toastContainerBottom: 2rem;
   }
 }
 
 @media (max-width: 350px) {
   html {
     font-size: 11px;
-  }
-
-  select,
-  input {
-    max-width: 90%;
   }
 }

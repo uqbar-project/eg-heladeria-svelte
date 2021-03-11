@@ -73,7 +73,7 @@
 
 <style>
   table {
-    margin: 0 auto;
+    margin: 0.5rem auto;
   }
 
   tr:nth-child(even) {
@@ -87,14 +87,13 @@
     padding: 1rem 0;
   }
 
-  input {
-    height: 3rem;
-    width: 60%;
-    padding-left: 1rem;
+  button {
+    width: auto;
   }
 
-  button {
-    padding: 0.78rem;
+  input {
+    height: 2.5rem;
+    padding-left: 1rem;
   }
 
   .columna-editar {
@@ -102,6 +101,9 @@
   }
 
   @media (max-width: 540px) {
+    input {
+      width: 60%;
+    }
     table {
       font-size: 0.8rem;
     }

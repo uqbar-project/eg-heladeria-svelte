@@ -23,7 +23,7 @@ const error = (error: { mensaje: string }): void => {
         },
         initial: 0,
         progress: 0,
-        dismissable: false
+        dismissable: true
     })
 }
 

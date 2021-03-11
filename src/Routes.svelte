@@ -12,5 +12,5 @@
     <Route path="/" component={Home} />
     <Route path="editar-heladeria/:id" component={EditarHeladeria} />
     </Router>
-    <SvelteToast />
+    <SvelteToast options={{ reversed: true, intro: { y: 192 } }}/>
 </main>

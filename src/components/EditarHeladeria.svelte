@@ -90,7 +90,7 @@
   {#if heladeria && listaDuenios}
     <h1 title={heladeria.nombre} class="titulo centrado full-ancho">Editar {heladeria.nombre}</h1>
     <h2 class="full-ancho">Datos</h2>
-    <div id="datos-principales" class="contenedor vertical">
+    <div id="datos-principales">
       <div>
         <label for="nombre">Nombre</label>
         <input maxlength="30" bind:value={heladeria.nombre} id="nombre" type="text" />
@@ -104,7 +104,7 @@
         </div>
       </div>
     </div>
-    <div class="contenedor vertical">
+    <div>
       <div>
         <label for="duenio">Dueño</label>
         <select title={heladeria.duenio.nombreCompleto} bind:value={heladeria.duenio} id="duenio">
@@ -123,12 +123,11 @@
     </div>
 
     <h2 class="full-ancho">Gustos</h2>
-    <div class="contenedor">
+    <div>
       <table>
         <tr>
           <th class="columna-gusto">Gusto</th>
           <th>Dificultad</th>
-          <th />
         </tr>
 
         {#each Object.entries(heladeria.gustos) as [nombre, dificultad]}
@@ -153,13 +152,13 @@
       <label for="dificultad">Dificultad</label>
       <input type="number" id="dificultad" min="1" max="10" bind:value={dificultadNuevoGusto} />
       <button class="boton-agregar" on:click={agregarGusto} disabled={!nombreNuevoGusto || !dificultadNuevoGusto}
-        >Agregar gusto</button
+        >Agregar</button
       >
     </div>
 
     <div class="botonera full-ancho">
       <button class="boton-actualizar" on:click={actualizarHeladeria} disabled={!hayCambiosPendientes}
-        >Actualizar heladeria</button
+        >Actualizar</button
       >
       <button on:click={() => navigate('/')}>Volver</button>
     </div>
@@ -172,10 +171,19 @@
     margin-right: 1rem;
   }
 
+  input,
+  select {
+    margin-bottom: 1rem;
+  }
+
+  input[type='radio'] {
+    width: auto;
+  }
+
   .card {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem 4rem;
+    gap: 1rem 3rem;
     padding: 1rem 2rem;
   }
 
@@ -187,34 +195,33 @@
     grid-column: 1/3;
   }
 
-  th {
-    text-align: left;
+  table {
+    font-size: 0.9rem;
   }
 
-  .columna-gusto {
-    width: 60%;
-  }
-
-  .td-dificultad {
+  .td-dificultad,
+  .td-eliminar {
     text-align: center;
   }
 
-  .td-eliminar {
-    text-align: right;
-    padding-right: 0;
+  .columna-gusto {
+    text-align: left;
   }
-
   .boton-agregar {
-    background-color: var(--color-primario);
+    
+    background-color: var(--color-secundario);
+    /* width: auto; */
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
   }
   .boton-agregar:disabled {
-    background-color: var(--disabled-primario);
+    background-color: var(--disabled-secundario);
   }
   .boton-actualizar:enabled {
-    background-color: var(--color-secundario);
+    background-color: var(--color-primario);
   }
   .boton-actualizar:disabled {
-    background-color: var(--disabled-secundario);
+    background-color: var(--disabled-primario);
   }
 
   h2 {
