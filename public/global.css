@@ -8,6 +8,7 @@
   /*toasts*/
   --toastContainerTop: auto;
   --toastContainerRight: auto;
+  --toastContainerBottom: 1rem;
   --toastWidth: 22rem;
   --toastContainerLeft: calc(50vw - var(--toastWidth) / 2);
 }
