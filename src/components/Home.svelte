@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte'
   import { navigate } from 'svelte-routing'
   import type { Heladeria } from '../model/heladeria'
   import heladeriaService from '../service/heladeria-service'
@@ -6,6 +7,10 @@
 
   let heladerias: Heladeria[] = []
   let nombreBuscar = ''
+
+  onMount(() => {
+    toast.removeLastToast()
+  })
 
   async function getHeladerias() {
     try {

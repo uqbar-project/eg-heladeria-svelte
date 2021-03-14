@@ -30,7 +30,7 @@
       listaDuenios = [...listaDuenios, nuevoDuenio]
       nombreNuevoDuenio = ''
       heladeria.duenio = nuevoDuenio
-      toast.success(`Se creó a '${nuevoDuenio.nombreCompleto}'`)
+      toast.push(`Duenio creado!`)
     } catch (error) {
       toast.error(error)
     }
@@ -40,7 +40,7 @@
     try {
       const { gustos } = await heladeriaService.deleteGustos(heladeria.id, gusto)
       heladeria.gustos = gustos
-      toast.success(`Gusto '${Object.keys(gusto)[0]}' eliminado!`)
+      toast.push(`Gusto eliminado!`)
     } catch (error) {
       toast.error(error)
     }
@@ -51,7 +51,7 @@
       const { gustos } = await heladeriaService.agregarGustos(heladeria.id, {
         [nombreNuevoGusto]: dificultadNuevoGusto,
       })
-      toast.success(`Gusto '${nombreNuevoGusto}' agregado!`)
+      toast.push(`Gusto agregado!`)
       heladeria.gustos = gustos
       nombreNuevoGusto = ''
       dificultadNuevoGusto = null
@@ -64,7 +64,7 @@
     try {
       heladeria = await heladeriaService.actualizar(heladeria)
       heladeriaOriginal = { ...heladeria }
-      toast.success(`Heladería actualizada!`)
+      toast.push(`Heladería actualizada!`)
     } catch (error) {
       toast.error(error)
     }
@@ -78,6 +78,7 @@
 
   onMount(async () => {
     try {
+      toast.removeLastToast()
       await getHeladeria()
       await getDuenios()
     } catch (error) {
@@ -208,7 +209,6 @@
     text-align: left;
   }
   .boton-agregar {
-    
     background-color: var(--color-secundario);
     /* width: auto; */
     font-size: 0.8rem;

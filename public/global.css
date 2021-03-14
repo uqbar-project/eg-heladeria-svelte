@@ -8,7 +8,8 @@
   /*toasts*/
   --toastContainerTop: auto;
   --toastContainerRight: auto;
-  --toastContainerLeft: calc(50vw - 8rem);
+  --toastWidth: 22rem;
+  --toastContainerLeft: calc(50vw - var(--toastWidth) / 2);
 }
 
 html,

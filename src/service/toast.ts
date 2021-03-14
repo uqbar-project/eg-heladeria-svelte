@@ -2,36 +2,31 @@ import { toast as svelteToast } from '@zerodevx/svelte-toast'
 
 const ERROR_CONEXION = "Error al conectarse con el servidor"
 
-const success = (mensaje: string): void => {
-    removeLastToast()
-    svelteToast.push(mensaje, {
-        theme: {
-            '--toastBackground': '#48BB78',
-            '--toastProgressBackground': '#2F855A',
-        },
-    })
-}
-
 const error = (error: { mensaje: string }): void => {
-    removeLastToast()
+
     const mensaje = error.mensaje ? error.mensaje : ERROR_CONEXION
 
-    svelteToast.push(mensaje, {
+    const options = {
         theme: {
-            '--toastBackground': '#F56565',
-            '--toastProgressBackground': '#C53030'
+            '--toastBackground': '#FF9494',
+            '--toastColor': 'black',
+
         },
         initial: 0,
         progress: 0,
         dismissable: true
-    })
+    }
+
+    push(mensaje, options)
 }
 
-const push = svelteToast.push
+const push = (mensaje: string, options = {}): void => {
+    removeLastToast()
+    svelteToast.push(mensaje, options)
+}
 
 const removeLastToast = (): void => {
     svelteToast.pop()
 }
 
-
-export const toast = { push, success, error, removeLastToast }
+export const toast = { push, error, removeLastToast }
