@@ -4,14 +4,13 @@ import { BACKEND_URL } from './constants'
 
 async function httpRequest<T>(request: RequestInfo): Promise<T> {
   const response = await fetch(request)
+  const responseJson = await response.json()
 
   if (!response.ok) {
-    const errorMessage = await response.text()
-
-    throw { status: response.status, mensaje: errorMessage }
+    throw responseJson
   }
 
-  return response.json()
+  return responseJson
 }
 
 async function customRequest<T>(route: string, body: Partial<T>, method = 'POST') {
