@@ -2,11 +2,11 @@ import { toast as svelteToast } from '@zerodevx/svelte-toast'
 
 const ERROR_CONEXION = "Error al conectarse con el servidor"
 
-const error = (error: { message: string }): void => {
+const error = (error: { message: string, status: string }): void => {
 
-    console.log(error)
+    console.dir(error)
 
-    const mensaje = error.message ? error.message : ERROR_CONEXION
+    const mensaje = error.status ? error.message : ERROR_CONEXION
 
     const options = {
         theme: {
