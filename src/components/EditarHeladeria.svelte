@@ -192,6 +192,10 @@
     margin-bottom: 0;
   }
 
+  label {
+    margin-bottom: 0.3rem;
+  }
+
   .full-ancho {
     grid-column: 1/3;
   }
@@ -208,6 +212,7 @@
   .columna-gusto {
     text-align: left;
   }
+
   .boton-agregar {
     background-color: var(--color-secundario);
     /* width: auto; */
@@ -229,6 +234,11 @@
   }
 
   @media (max-width: 540px) {
+    .botonera button {
+      margin-bottom: 1rem;
+      max-width: 100%;
+    }
+
     .card {
       display: flex;
       flex-direction: column;

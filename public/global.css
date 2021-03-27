@@ -108,11 +108,13 @@ button:focus {
 
 .botonera {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
   margin-top: 1rem;
 }
+
 .botonera button {
-  margin-right: 1rem;
+  max-width: 45%;
 }
 
 .centrado {
@@ -158,8 +160,14 @@ th {
 
 @media (max-width: 540px) {
   :root {
-    --ancho-default: 20rem;
+    --ancho-default: 18rem;
     --toastContainerBottom: 2rem;
+  }
+
+  input,
+  select,
+  button {
+    max-width: 100%;
   }
 }
 
