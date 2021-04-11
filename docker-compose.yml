@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  backend:
+    hostname: backend
+    image: heladerias-back
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql/heladeria
+
+  frontend:
+    tty: true
+    hostname: frontend
+    build: .
+    expose:
+      - 5000
+    ports:
+      - 5000:5000
+    depends_on:
+      - backend
+
+  mysql:
+    hostname: mysql
+    image: mysql:8.0.21
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+    expose:
+      - 3306
+    ports:
+      - 3306:3306

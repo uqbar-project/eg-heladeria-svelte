@@ -1,9 +1,9 @@
 {
-  "name": "svelte-app",
+  "name": "ar.edu.uqbar-project-heladeria-svelte",
   "version": "1.0.0",
   "scripts": {
     "build": "rollup -c",
-    "dev": "rollup -c -w",
+    "dev": "HOST=0.0.0.0 rollup -c -w",
     "start": "sirv public -s",
     "validate": "svelte-check",
     "lint": "eslint --fix --quiet src --ext .js,.svelte"
