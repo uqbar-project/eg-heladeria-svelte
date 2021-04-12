@@ -3,7 +3,8 @@ version: '3'
 services:
   backend:
     hostname: backend
-    image: heladerias-back
+    image: alete89/heladeria-backend
+    # build: ../eg-heladeria-springboot
     expose:
       - 8080
     ports:
