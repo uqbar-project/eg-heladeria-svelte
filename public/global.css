@@ -3,7 +3,6 @@
   --color-secundario: #99cffa;
   --disabled-primario: #f1d8df;
   --disabled-secundario: #e8f0f7;
-  --ancho-default: 35rem;
   --background: #a1eaea;
   /*toasts*/
   --toastContainerTop: auto;
@@ -27,6 +26,11 @@ body {
   box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue',
     sans-serif;
+}
+
+h2,
+h3 {
+  margin: 0;
 }
 
 a {
@@ -97,24 +101,9 @@ button:focus {
   padding: 1rem;
 }
 
-.ancho {
-  max-width: var(--ancho-default);
+.contenido {
+  max-width: 35rem;
   margin: 3rem auto;
-}
-
-#gustos {
-  margin-top: 1rem;
-}
-
-.botonera {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin-top: 1rem;
-}
-
-.botonera button {
-  max-width: 45%;
 }
 
 .centrado {
@@ -134,13 +123,12 @@ td,
 select,
 .titulo {
   overflow: hidden;
-  /* white-space: nowrap; */
   text-overflow: ellipsis;
 }
 
 table {
   width: 100%;
-  border-spacing: 0 0.5rem;
+  border-spacing: 0 1rem;
   table-layout: fixed;
 }
 
@@ -152,27 +140,25 @@ th {
   :root {
     --toastContainerBottom: 25rem;
   }
-
-  html {
-    font-size: 12px;
-  }
 }
 
 @media (max-width: 540px) {
   :root {
-    --ancho-default: 18rem;
     --toastContainerBottom: 2rem;
+  }
+
+  .contenido {
+    margin-top: 0;
+  }
+
+  .card {
+    background-color: transparent;
+    box-shadow: none;
   }
 
   input,
   select,
   button {
     max-width: 100%;
-  }
-}
-
-@media (max-width: 350px) {
-  html {
-    font-size: 11px;
   }
 }

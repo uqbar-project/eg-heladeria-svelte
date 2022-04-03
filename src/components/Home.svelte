@@ -10,6 +10,7 @@
 
   onMount(() => {
     toast.removeLastToast()
+    getHeladerias()
   })
 
   async function getHeladerias() {
@@ -35,10 +36,8 @@
   }
 </script>
 
-<div class="card ancho centrado">
-  <div>
-    <h1 class="titulo centrado">Heladerias</h1>
-  </div>
+<div class="card contenido centrado">
+  <h1 class="titulo centrado">Heladerias</h1>
   <div>
     <input
       type="text"
@@ -79,17 +78,23 @@
 <style>
   table {
     margin: 0.5rem auto;
+    /* border-spacing: 1rem 1rem; */
+  }
+
+  td {
+    padding: 1rem;
+  }
+
+  td {
+    /* border-radius: 15px; */
   }
 
   tr:nth-child(even) {
     background-color: var(--color-primario);
   }
+
   tr:nth-child(odd) {
     background-color: var(--color-secundario);
-  }
-
-  img {
-    padding: 1rem 0;
   }
 
   button {
@@ -107,10 +112,7 @@
 
   @media (max-width: 540px) {
     input {
-      width: 60%;
-    }
-    table {
-      font-size: 0.8rem;
+      width: auto;
     }
   }
 </style>

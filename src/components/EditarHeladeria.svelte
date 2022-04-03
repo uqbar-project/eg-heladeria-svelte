@@ -87,11 +87,11 @@
   })
 </script>
 
-<div class="card ancho">
+<div class="card contenido">
   {#if heladeria && listaDuenios}
-    <h1 title={heladeria.nombre} class="titulo centrado full-ancho">Editar {heladeria.nombre}</h1>
-    <h2 class="full-ancho">Datos</h2>
-    <div id="datos-principales">
+    <h2 title={heladeria.nombre} class="titulo centrado full-ancho">Editar {heladeria.nombre}</h2>
+    <section id="datos-principales">
+      <h3 class="titulo-seccion">Datos</h3>
       <div>
         <label for="nombre">Nombre</label>
         <input maxlength="30" bind:value={heladeria.nombre} id="nombre" type="text" />
@@ -104,72 +104,78 @@
           {/each}
         </div>
       </div>
-    </div>
-    <div>
-      <div>
-        <label for="duenio">Dueño</label>
-        <select title={heladeria.duenio.nombreCompleto} bind:value={heladeria.duenio} id="duenio">
-          {#each listaDuenios as duenio}
-            <option selected={duenio.id === heladeria.duenio.id} value={duenio}>
-              {duenio.nombreCompleto}
-            </option>
-          {/each}
-        </select>
-      </div>
+    </section>
+    <section>
+      <h3 class="titulo-seccion">Dueño</h3>
+      <label for="duenio">Dueño</label>
+      <select title={heladeria.duenio.nombreCompleto} bind:value={heladeria.duenio} id="duenio">
+        {#each listaDuenios as duenio}
+          <option selected={duenio.id === heladeria.duenio.id} value={duenio}>
+            {duenio.nombreCompleto}
+          </option>
+        {/each}
+      </select>
       <div>
         <label for="nuevoDuenio">Nuevo dueño</label>
         <input maxlength="100" type="text" id="nuevoDuenio" bind:value={nombreNuevoDuenio} />
         <button class="boton-agregar" on:click={agregarDuenio} disabled={!nombreNuevoDuenio}>Agregar</button>
       </div>
-    </div>
+    </section>
 
-    <h2 class="full-ancho">Gustos</h2>
-    <div>
-      <table>
-        <tr>
-          <th class="columna-gusto">Gusto</th>
-          <th>Dificultad</th>
-        </tr>
-
-        {#each Object.entries(heladeria.gustos) as [nombre, dificultad]}
+    <section>
+      <h3 class="titulo-seccion">Gustos</h3>
+      <div class="tabla-gustos-container">
+        <table>
           <tr>
-            <td title={nombre}>{nombre}</td>
-            <td class="td-dificultad">{dificultad}</td>
-            <td class="td-eliminar"
-              ><img
-                src="../assets/trash.svg"
-                height="20px"
-                alt="eliminar"
-                on:click={() => eliminarGusto({ [nombre]: dificultad })}
-              /></td
-            >
+            <th class="columna-gusto">Gusto</th>
+            <th>Dificultad</th>
           </tr>
-        {/each}
-      </table>
-    </div>
-    <div>
-      <label for="nuevoGusto">Nuevo gusto</label>
+
+          {#each Object.entries(heladeria.gustos) as [nombre, dificultad]}
+            <tr>
+              <td title={nombre}>{nombre}</td>
+              <td>{dificultad}</td>
+              <td>
+                <img
+                  src="../assets/trash.svg"
+                  height="20px"
+                  alt="eliminar"
+                  on:click={() => eliminarGusto({ [nombre]: dificultad })}
+                />
+              </td>
+            </tr>
+          {/each}
+        </table>
+      </div>
+    </section>
+    <section>
+      <h3 class="titulo-seccion">Agregar gusto</h3>
+      <label for="nuevoGusto">Nombre</label>
       <input maxlength="50" type="text" id="nuevoGusto" bind:value={nombreNuevoGusto} />
       <label for="dificultad">Dificultad</label>
       <input type="number" id="dificultad" min="1" max="10" bind:value={dificultadNuevoGusto} />
       <button class="boton-agregar" on:click={agregarGusto} disabled={!nombreNuevoGusto || !dificultadNuevoGusto}
         >Agregar</button
       >
-    </div>
+    </section>
 
-    <div class="botonera full-ancho">
+    <section class="botonera full-ancho">
+      <button on:click={() => navigate('/')}>Volver</button>
       <button class="boton-actualizar" on:click={actualizarHeladeria} disabled={!hayCambiosPendientes}
         >Actualizar</button
       >
-      <button on:click={() => navigate('/')}>Volver</button>
-    </div>
+    </section>
   {/if}
 </div>
 
 <style>
+  .tabla-gustos-container {
+    max-height: 19rem;
+    overflow: auto;
+  }
+
   .radio-label {
     display: inline;
-    margin-right: 1rem;
   }
 
   input,
@@ -184,28 +190,35 @@
   .card {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem 3rem;
+    gap: 2rem 4rem;
     padding: 1rem 2rem;
   }
 
   .titulo {
+    font-size: 2rem;
     margin-bottom: 0;
   }
 
   label {
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
   }
 
   .full-ancho {
     grid-column: 1/3;
   }
 
+  .titulo-seccion {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
   table {
     font-size: 0.9rem;
   }
 
-  .td-dificultad,
-  .td-eliminar {
+  td:nth-child(2),
+  td:nth-child(3) {
     text-align: center;
   }
 
@@ -215,28 +228,32 @@
 
   .boton-agregar {
     background-color: var(--color-secundario);
-    /* width: auto; */
     font-size: 0.8rem;
-    padding: 0.5rem 1rem;
+    margin-top: 0.5rem;
   }
+
   .boton-agregar:disabled {
     background-color: var(--disabled-secundario);
   }
-  .boton-actualizar:enabled {
+
+  .boton-actualizar {
     background-color: var(--color-primario);
   }
+
   .boton-actualizar:disabled {
     background-color: var(--disabled-primario);
   }
 
-  h2 {
-    margin: 0;
+  .botonera {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    gap: 1rem;
   }
 
   @media (max-width: 540px) {
     .botonera button {
       margin-bottom: 1rem;
-      max-width: 100%;
     }
 
     .card {
