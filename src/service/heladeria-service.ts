@@ -23,8 +23,11 @@ async function customRequest<T>(route: string, body: Partial<T>, method = 'POST'
   )
 }
 
-async function buscarHeladerias(nombreBuscar: string): Promise<Heladeria[]> {
-  return httpRequest<Heladeria[]>(`${BACKEND_URL}/heladerias/buscar/${nombreBuscar}`)
+async function buscarHeladerias(nombre: string): Promise<Heladeria[]> {
+  const params = new URLSearchParams({
+    nombre,
+  })
+  return httpRequest<Heladeria[]>(`${BACKEND_URL}/heladerias/buscar?${params}`)
 }
 
 async function fetchById(heladeriaId: number): Promise<Heladeria> {

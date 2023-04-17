@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "build": "rollup -c",
-    "dev": "HOST=0.0.0.0 rollup -c -w",
-    "start": "sirv public -s",
+    "dev": "rollup -c -w",
+    "start": "sirv public -s -p 5555",
     "validate": "svelte-check",
     "lint": "eslint --fix --quiet src --ext .js,.svelte"
   },
